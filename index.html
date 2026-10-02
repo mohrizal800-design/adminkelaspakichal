@@ -113,7 +113,7 @@
                 <div class="table-container">
                     <div class="loader" id="tableLoaderSiswa"></div>
                     <table id="tabelSiswa">
-                        <thead><tr><th>Profil</th><th>NIS</th><th>Nama Lengkap</th><th>Gender</th><th>Aksi</th></tr></thead>
+                        <thead><tr><th>Profil</th><th>NISN</th><th>Nama Lengkap</th><th>Gender</th><th>Aksi</th></tr></thead>
                         <tbody id="dataSiswaBody"></tbody>
                     </table>
                 </div>
@@ -130,7 +130,7 @@
                     <div class="loader" id="tableLoaderAbsen"></div>
                     <table id="tabelAbsen">
                         <thead>
-                            <tr><th>NIS</th><th>Nama Lengkap</th><th>Status Kehadiran</th></tr>
+                            <tr><th>NISN</th><th>Nama Lengkap</th><th>Status Kehadiran</th></tr>
                         </thead>
                         <tbody id="dataAbsenBody"></tbody>
                     </table>
@@ -198,13 +198,12 @@
 
     <script>
         // ==========================================
-        // URL BARU ANDA TELAH DITANAMKAN DI SINI
+        // URL ANDA TELAH DITANAMKAN DI SINI
         // ==========================================
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxYm1RHwJ1bgkpDtdWkaWtSAvIEcLAi5ULTFbYsEjXCprbNIHECSMiFfMzqIDMl763U/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbysKq7vIg9X62lmTe_eHKP8sxhukdMOLA0uGphsKXn2fWMiSfuUr2vDm6io38-5S-0/exec';
         
         let globalDataSiswa = [];
 
-        // Set tanggal default ke hari ini
         document.getElementById('tanggalAbsen').valueAsDate = new Date();
         document.getElementById('tanggalJurnal').valueAsDate = new Date();
 
@@ -255,7 +254,7 @@
                     }
                 });
             } catch (error) {
-                alert("Gagal memuat data dari Excel. Pastikan koneksi dan URL Script benar.");
+                alert("Gagal memuat data dari Excel. Pastikan Apps Script Google sudah di-Deploy sebagai 'Versi Baru' dan sheet 'Data Siswa' sudah ada.");
             }
             document.getElementById('tableLoaderSiswa').style.display = 'none';
             document.getElementById('tableLoaderAbsen').style.display = 'none';
