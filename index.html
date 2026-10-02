@@ -16,7 +16,8 @@
         .sidebar { width: 260px; background-color: var(--sidebar-bg); color: var(--white); display: flex; flex-direction: column; }
         .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid #374151; }
         .sidebar-header h2 { font-size: 1.2rem; font-weight: 600; }
-        .menu-list { list-style: none; padding-top: 15px; }
+        .menu-category { padding: 15px 20px 5px; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; }
+        .menu-list { list-style: none; padding-bottom: 20px; }
         .menu-list a { display: flex; align-items: center; padding: 12px 20px; color: #D1D5DB; text-decoration: none; font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
         .menu-list a:hover, .menu-list a.active { background-color: var(--sidebar-hover); color: var(--white); border-left: 4px solid var(--primary-color); }
         .menu-list a i { width: 25px; font-size: 1.1rem; }
@@ -27,7 +28,7 @@
         .profile { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.9rem;}
         .profile img { width: 35px; height: 35px; border-radius: 50%; }
         
-        /* Konten Halaman */
+        /* Konten */
         .content { padding: 30px; }
         .page-section { display: none; }
         .page-section.active { display: block; animation: fadeIn 0.3s; }
@@ -35,30 +36,39 @@
         .page-title { font-size: 1.5rem; color: var(--text-main); margin-bottom: 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
 
         /* Tombol & Tabel */
-        .btn { padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem;}
+        .btn { padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; justify-content: center;}
         .btn-primary { background-color: var(--primary-color); color: white; }
         .btn-primary:hover { background-color: var(--primary-hover); }
         .btn-info { background-color: #3B82F6; color: white; padding: 6px 12px; font-size: 0.8rem; }
+        .btn-block { width: 100%; padding: 12px; font-size: 1rem; margin-top: 15px; }
         
-        .table-container { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); overflow-x: auto; }
+        .table-container { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); overflow-x: auto; margin-bottom: 20px;}
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #E5E7EB; }
         th { background-color: #F9FAFB; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
         td { font-size: 0.9rem; color: var(--text-main); vertical-align: middle; }
         .foto-siswa { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
 
-        /* Form Modal */
+        /* Radio Button Absen (H S I A) */
+        .absen-options { display: flex; gap: 8px; }
+        .absen-radio { display: none; }
+        .absen-label { padding: 5px 12px; border-radius: 20px; border: 1px solid #D1D5DB; cursor: pointer; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); transition: 0.2s;}
+        
+        .absen-radio[value="H"]:checked + .absen-label { background-color: #16A34A; color: white; border-color: #16A34A; }
+        .absen-radio[value="S"]:checked + .absen-label { background-color: #3B82F6; color: white; border-color: #3B82F6; }
+        .absen-radio[value="I"]:checked + .absen-label { background-color: #EAB308; color: white; border-color: #EAB308; }
+        .absen-radio[value="A"]:checked + .absen-label { background-color: #DC2626; color: white; border-color: #DC2626; }
+
+        /* Form Grid & Modal */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
         .modal-overlay.active { display: flex; }
         .modal-box { background: white; padding: 30px; border-radius: 10px; width: 600px; max-width: 95%; max-height: 90vh; overflow-y: auto; }
         .modal-box h3 { margin-bottom: 20px; border-bottom: 2px solid #E5E7EB; padding-bottom: 10px; }
-        
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .form-group { margin-bottom: 15px; }
         .form-group.full-width { grid-column: span 2; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; color: var(--text-muted); }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; font-family: inherit; }
-        
         .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; grid-column: span 2;}
         .btn-secondary { background-color: #E5E7EB; color: var(--text-main); }
         
@@ -72,7 +82,11 @@
         <div class="sidebar-header"><h2><i class="fas fa-graduation-cap"></i> Portal Guru</h2></div>
         <ul class="menu-list">
             <li><a href="#" class="active" onclick="showPage('dashboard', this)"><i class="fas fa-home"></i> Dashboard</a></li>
+            <div class="menu-category">Wali Kelas</div>
             <li><a href="#" onclick="showPage('data-siswa', this)"><i class="fas fa-users"></i> Data Siswa</a></li>
+            <li><a href="#" onclick="showPage('kehadiran', this)"><i class="fas fa-calendar-check"></i> Kehadiran</a></li>
+            <div class="menu-category">Guru Mapel</div>
+            <li><a href="#" onclick="showPage('jurnal', this); loadDataJurnal();"><i class="fas fa-edit"></i> Jurnal Mengajar</a></li>
         </ul>
     </nav>
 
@@ -86,85 +100,93 @@
             <!-- DASHBOARD -->
             <div id="dashboard" class="page-section active">
                 <h2 class="page-title">Dashboard</h2>
-                <p>Silakan klik menu <b>Data Siswa</b> di sebelah kiri untuk mengelola daftar siswa kelas Anda.</p>
+                <p>Selamat datang! Modul <b>Data Siswa, Kehadiran, dan Jurnal Mengajar</b> telah terhubung dengan Google Sheets Anda.</p>
             </div>
 
             <!-- DATA SISWA -->
             <div id="data-siswa" class="page-section">
                 <div class="page-title">
-                    <span>Buku Induk Kelas (Data Siswa)</span>
-                    <button class="btn btn-primary" onclick="openModal()"><i class="fas fa-plus"></i> Tambah Siswa Baru</button>
+                    <span>Buku Induk Kelas</span>
+                    <button class="btn btn-primary" onclick="openModal()"><i class="fas fa-plus"></i> Tambah Siswa</button>
                 </div>
                 
                 <div class="table-container">
                     <div class="loader" id="tableLoaderSiswa"></div>
                     <table id="tabelSiswa">
+                        <thead><tr><th>Profil</th><th>NIS</th><th>Nama Lengkap</th><th>Gender</th><th>Aksi</th></tr></thead>
+                        <tbody id="dataSiswaBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- KEHADIRAN -->
+            <div id="kehadiran" class="page-section">
+                <div class="page-title">
+                    <span>Daftar Kehadiran Harian</span>
+                    <input type="date" id="tanggalAbsen" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;">
+                </div>
+                
+                <div class="table-container">
+                    <div class="loader" id="tableLoaderAbsen"></div>
+                    <table id="tabelAbsen">
                         <thead>
-                            <tr>
-                                <th>Profil</th>
-                                <th>NIS</th>
-                                <th>Nama Lengkap</th>
-                                <th>Gender</th>
-                                <th>Aksi</th>
-                            </tr>
+                            <tr><th>NIS</th><th>Nama Lengkap</th><th>Status Kehadiran</th></tr>
                         </thead>
-                        <tbody id="dataSiswaBody">
-                            <!-- Data akan muncul di sini -->
-                        </tbody>
+                        <tbody id="dataAbsenBody"></tbody>
+                    </table>
+                    <button class="btn btn-primary btn-block" id="btnSimpanAbsen" onclick="simpanAbsensi()">
+                        <i class="fas fa-save"></i> Simpan Rekap Absensi
+                    </button>
+                </div>
+            </div>
+
+            <!-- JURNAL MENGAJAR -->
+            <div id="jurnal" class="page-section">
+                <h2 class="page-title">Jurnal Mengajar Harian</h2>
+                
+                <!-- Form Isi Jurnal -->
+                <div class="table-container" style="background-color: #F8FAFC; border: 1px solid #E2E8F0;">
+                    <form id="formJurnal">
+                        <div class="form-grid">
+                            <div class="form-group"><label>Tanggal</label><input type="date" name="tanggal" id="tanggalJurnal" required></div>
+                            <div class="form-group"><label>Jam Ke-</label><input type="text" name="jam" placeholder="Misal: 1-2" required></div>
+                            <div class="form-group full-width"><label>Mata Pelajaran / Kelas</label><input type="text" name="mapel" placeholder="Misal: Matematika - Kelas 7A" required></div>
+                            <div class="form-group full-width"><label>Materi Pembelajaran</label><textarea name="materi" rows="2" required placeholder="Pokok bahasan hari ini..."></textarea></div>
+                            <div class="form-group full-width"><label>Keterangan / Kendala / Siswa Absen</label><textarea name="keterangan" rows="2" placeholder="Catatan tambahan..."></textarea></div>
+                            <div class="modal-actions">
+                                <button type="submit" class="btn btn-primary" id="btnSimpanJurnal"><i class="fas fa-paper-plane"></i> Kirim Jurnal</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tabel Riwayat Jurnal -->
+                <h3 style="margin-bottom: 10px; font-size: 1.1rem;">Riwayat Jurnal</h3>
+                <div class="table-container">
+                    <div class="loader" id="tableLoaderJurnal"></div>
+                    <table>
+                        <thead><tr><th>Tanggal</th><th>Jam</th><th>Mata Pelajaran</th><th>Materi</th></tr></thead>
+                        <tbody id="dataJurnalBody"></tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- MODAL FORM TAMBAH SISWA LENGKAP -->
+    <!-- MODAL FORM TAMBAH SISWA -->
     <div class="modal-overlay" id="modalSiswa">
         <div class="modal-box">
             <h3><i class="fas fa-user-plus"></i> Form Data Induk Siswa</h3>
             <form id="formSiswa">
                 <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label>Nama Lengkap</label>
-                        <input type="text" name="nama" required placeholder="Sesuai Akta Kelahiran">
-                    </div>
-                    <div class="form-group">
-                        <label>NIS / NISN</label>
-                        <input type="number" name="nis" required placeholder="Nomor Induk">
-                    </div>
-                    <div class="form-group">
-                        <label>Jenis Kelamin</label>
-                        <select name="gender">
-                            <option value="Laki-laki">Laki-laki (L)</option>
-                            <option value="Perempuan">Perempuan (P)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Tempat, Tanggal Lahir</label>
-                        <input type="text" name="ttl" required placeholder="Contoh: Jakarta, 15 Mei 2008">
-                    </div>
-                    <div class="form-group">
-                        <label>Agama</label>
-                        <select name="agama">
-                            <option value="Islam">Islam</option>
-                            <option value="Kristen">Kristen</option>
-                            <option value="Katolik">Katolik</option>
-                            <option value="Hindu">Hindu</option>
-                            <option value="Buddha">Buddha</option>
-                            <option value="Konghucu">Konghucu</option>
-                        </select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Alamat Lengkap</label>
-                        <textarea name="alamat" rows="2" required placeholder="Jalan, RT/RW, Desa/Kelurahan"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Orang Tua / Wali</label>
-                        <input type="text" name="ortu" required placeholder="Nama Ayah / Ibu">
-                    </div>
-                    <div class="form-group">
-                        <label>No. HP / WhatsApp Ortu</label>
-                        <input type="text" name="nohp" placeholder="08xxxxxxxxxx">
-                    </div>
+                    <div class="form-group full-width"><label>Nama Lengkap</label><input type="text" name="nama" required></div>
+                    <div class="form-group"><label>NIS / NISN</label><input type="number" name="nis" required></div>
+                    <div class="form-group"><label>Jenis Kelamin</label><select name="gender"><option value="Laki-laki">Laki-laki (L)</option><option value="Perempuan">Perempuan (P)</option></select></div>
+                    <div class="form-group"><label>Tempat, Tanggal Lahir</label><input type="text" name="ttl" required></div>
+                    <div class="form-group"><label>Agama</label><select name="agama"><option>Islam</option><option>Kristen</option><option>Katolik</option><option>Hindu</option><option>Buddha</option><option>Konghucu</option></select></div>
+                    <div class="form-group full-width"><label>Alamat Lengkap</label><textarea name="alamat" rows="2" required></textarea></div>
+                    <div class="form-group"><label>Nama Orang Tua / Wali</label><input type="text" name="ortu" required></div>
+                    <div class="form-group"><label>No. HP / WhatsApp Ortu</label><input type="text" name="nohp"></div>
                     <div class="modal-actions">
                         <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
                         <button type="submit" class="btn btn-primary" id="btnSimpanSiswa"><i class="fas fa-save"></i> Simpan Data</button>
@@ -175,30 +197,37 @@
     </div>
 
     <script>
-        // URL SCRIPT GOOGLE ANDA
+        // ==========================================
+        // URL ANDA TELAH DITANAMKAN DI SINI
+        // ==========================================
         const scriptURL = 'https://script.google.com/macros/s/AKfycbysKq7vIg9X62lmTe_eHKP8sxhukdMOLA0uGphsKXn2fWMiSfuUr2vDm6io38-5S-0/exec';
         
-        let globalDataSiswa = []; // Tempat menyimpan data sementara agar bisa di-klik detailnya
+        let globalDataSiswa = [];
 
-        // --- FUNGSI 1: MENGAMBIL DATA SISWA DARI EXCEL ---
+        // Set tanggal default ke hari ini
+        document.getElementById('tanggalAbsen').valueAsDate = new Date();
+        document.getElementById('tanggalJurnal').valueAsDate = new Date();
+
+        // 1. FUNGSI MENGAMBIL DATA SISWA & MEMBUAT LIST ABSEN
         async function loadDataSiswa() {
             document.getElementById('tableLoaderSiswa').style.display = 'block';
+            document.getElementById('tableLoaderAbsen').style.display = 'block';
             document.getElementById('dataSiswaBody').innerHTML = ''; 
+            document.getElementById('dataAbsenBody').innerHTML = ''; 
             
             try {
-                // Kita mengirim perintah ?action=get_siswa agar script tahu apa yang harus dikerjakan
                 const response = await fetch(scriptURL + "?action=get_siswa");
                 const data = await response.json();
-                
-                globalDataSiswa = data; // Simpan data ke memori
+                globalDataSiswa = data;
                 
                 if(data.length === 0) {
                     document.getElementById('dataSiswaBody').innerHTML = '<tr><td colspan="5" style="text-align:center;">Belum ada data siswa.</td></tr>';
+                    document.getElementById('dataAbsenBody').innerHTML = '<tr><td colspan="3" style="text-align:center;">Belum ada data siswa.</td></tr>';
                 }
 
-                // Masukkan data satu per satu ke dalam tabel html
                 data.forEach((siswa, index) => {
                     if (siswa.nama) { 
+                        // Isi Data Siswa
                         let avatar = `https://ui-avatars.com/api/?name=${siswa.nama}&background=random&color=fff`;
                         document.getElementById('dataSiswaBody').insertAdjacentHTML('beforeend', `
                             <tr>
@@ -206,56 +235,141 @@
                                 <td>${siswa.nis}</td>
                                 <td><strong>${siswa.nama}</strong></td>
                                 <td>${siswa.gender}</td>
+                                <td><button class="btn btn-info" onclick="lihatDetail(${index})"><i class="fas fa-eye"></i> Detail</button></td>
+                            </tr>
+                        `);
+
+                        // Isi Daftar Hadir
+                        document.getElementById('dataAbsenBody').insertAdjacentHTML('beforeend', `
+                            <tr>
+                                <td>${siswa.nis}</td>
+                                <td><strong>${siswa.nama}</strong></td>
                                 <td>
-                                    <button class="btn btn-info" onclick="lihatDetail(${index})">
-                                        <i class="fas fa-eye"></i> Detail
-                                    </button>
+                                    <div class="absen-options">
+                                        <label><input type="radio" class="absen-radio" name="status_${siswa.nis}" value="H" checked> <span class="absen-label">Hadir</span></label>
+                                        <label><input type="radio" class="absen-radio" name="status_${siswa.nis}" value="S"> <span class="absen-label">Sakit</span></label>
+                                        <label><input type="radio" class="absen-radio" name="status_${siswa.nis}" value="I"> <span class="absen-label">Izin</span></label>
+                                        <label><input type="radio" class="absen-radio" name="status_${siswa.nis}" value="A"> <span class="absen-label">Alpa</span></label>
+                                    </div>
                                 </td>
                             </tr>
                         `);
                     }
                 });
             } catch (error) {
-                console.error("Error mengambil data:", error);
-                document.getElementById('dataSiswaBody').innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Gagal memuat data dari Excel.</td></tr>';
+                alert("Gagal memuat data dari Excel.");
             }
             document.getElementById('tableLoaderSiswa').style.display = 'none';
+            document.getElementById('tableLoaderAbsen').style.display = 'none';
         }
 
-        // --- FUNGSI 2: MENYIMPAN DATA SISWA KE EXCEL ---
+        // 2. FUNGSI SIMPAN SISWA
         document.getElementById('formSiswa').addEventListener('submit', e => {
-            e.preventDefault(); // Mencegah web reload saat disubmit
-            
+            e.preventDefault();
             const btn = document.getElementById('btnSimpanSiswa');
-            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Menyimpan...";
-            btn.disabled = true;
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Menyimpan..."; btn.disabled = true;
 
             const formData = new FormData(document.getElementById('formSiswa'));
-            formData.append('action', 'tambah_siswa'); // Beri tahu script bahwa kita mau tambah siswa
+            formData.append('action', 'tambah_siswa');
 
             fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => {
-                    closeModal();
-                    document.getElementById('formSiswa').reset();
-                    alert("Data Siswa Baru Berhasil Disimpan ke Google Sheets!");
-                    loadDataSiswa(); // Muat ulang tabel agar data baru muncul
+                .then(() => {
+                    closeModal(); document.getElementById('formSiswa').reset();
+                    alert("Data Siswa Baru Berhasil Disimpan!"); loadDataSiswa(); 
                 })
-                .catch(error => {
-                    alert('Gagal menyimpan data. Cek koneksi Anda.');
+                .finally(() => { btn.innerHTML = "<i class='fas fa-save'></i> Simpan Data"; btn.disabled = false; });
+        });
+
+        // 3. FUNGSI SIMPAN ABSENSI KELAS
+        window.simpanAbsensi = function() {
+            const btn = document.getElementById('btnSimpanAbsen');
+            const tanggal = document.getElementById('tanggalAbsen').value;
+            if(!tanggal) { alert("Pilih tanggal absen terlebih dahulu!"); return; }
+
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Menyimpan Absensi..."; 
+            btn.disabled = true;
+
+            let rekapAbsen = [];
+            globalDataSiswa.forEach(siswa => {
+                if(siswa.nama) {
+                    let statusTerpilih = document.querySelector(`input[name="status_${siswa.nis}"]:checked`).value;
+                    rekapAbsen.push({ nis: siswa.nis, nama: siswa.nama, status: statusTerpilih });
+                }
+            });
+
+            const formData = new FormData();
+            formData.append('action', 'simpan_absen');
+            formData.append('tanggal', tanggal);
+            formData.append('data_absen', JSON.stringify(rekapAbsen));
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(() => { alert(`Absensi tanggal ${tanggal} berhasil disimpan ke Excel!`); })
+                .catch(() => { alert("Gagal menyimpan absen!"); })
+                .finally(() => { btn.innerHTML = "<i class='fas fa-save'></i> Simpan Rekap Absensi"; btn.disabled = false; });
+        }
+
+        // 4. FUNGSI MENGAMBIL DATA JURNAL
+        async function loadDataJurnal() {
+            document.getElementById('tableLoaderJurnal').style.display = 'block';
+            document.getElementById('dataJurnalBody').innerHTML = '';
+            
+            try {
+                const response = await fetch(scriptURL + "?action=get_jurnal");
+                const data = await response.json();
+                
+                if(data.length === 0) {
+                    document.getElementById('dataJurnalBody').innerHTML = '<tr><td colspan="4" style="text-align:center;">Belum ada riwayat jurnal.</td></tr>';
+                }
+
+                // Di-reverse agar jurnal terbaru berada paling atas
+                data.reverse().forEach(j => {
+                    if (j.tanggal) {
+                        let tglFormat = new Date(j.tanggal).toLocaleDateString('id-ID');
+                        document.getElementById('dataJurnalBody').insertAdjacentHTML('beforeend', `
+                            <tr>
+                                <td>${tglFormat}</td>
+                                <td>${j.jam}</td>
+                                <td><strong>${j.mapel}</strong></td>
+                                <td>${j.materi}</td>
+                            </tr>
+                        `);
+                    }
+                });
+            } catch (e) {
+                document.getElementById('dataJurnalBody').innerHTML = '<tr><td colspan="4" style="text-align:center;">Gagal memuat jurnal.</td></tr>';
+            }
+            document.getElementById('tableLoaderJurnal').style.display = 'none';
+        }
+
+        // 5. FUNGSI SIMPAN JURNAL MENGAJAR
+        document.getElementById('formJurnal').addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSimpanJurnal'); 
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Mengirim..."; 
+            btn.disabled = true;
+
+            const formData = new FormData(document.getElementById('formJurnal')); 
+            formData.append('action', 'simpan_jurnal');
+            
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(() => { 
+                    alert("Jurnal Mengajar berhasil dikirim ke Google Sheets!"); 
+                    document.getElementById('formJurnal').reset(); 
+                    document.getElementById('tanggalJurnal').valueAsDate = new Date(); 
+                    loadDataJurnal(); 
                 })
-                .finally(() => {
-                    btn.innerHTML = "<i class='fas fa-save'></i> Simpan Data";
-                    btn.disabled = false;
+                .finally(() => { 
+                    btn.innerHTML = "<i class='fas fa-paper-plane'></i> Kirim Jurnal"; 
+                    btn.disabled = false; 
                 });
         });
 
-        // --- FUNGSI UI: POPUP DETAIL SISWA ---
+        // UI FUNGSI
         window.lihatDetail = function(index) {
             const s = globalDataSiswa[index];
-            alert(`--- BUKU INDUK SISWA ---\n\nNama Lengkap: ${s.nama}\nNIS / NISN: ${s.nis}\nJenis Kelamin: ${s.gender}\nTempat, Tgl Lahir: ${s.ttl}\nAgama: ${s.agama}\n\nAlamat Lengkap: ${s.alamat}\n\nData Orang Tua:\nNama: ${s.ortu}\nNo. HP: ${s.nohp || '-'}`);
+            alert(`PROFIL SISWA:\n\nNama: ${s.nama}\nNIS: ${s.nis}\nGender: ${s.gender}\nTTL: ${s.ttl}\nAgama: ${s.agama}\nAlamat: ${s.alamat}\nNama Ortu: ${s.ortu}\nNo. HP: ${s.nohp || '-'}`);
         };
 
-        // --- FUNGSI UI: NAVIGASI & JAM ---
         function showPage(pageId, element) {
             document.querySelectorAll('.menu-list a').forEach(link => link.classList.remove('active'));
             element.classList.add('active');
@@ -267,11 +381,9 @@
         function closeModal() { document.getElementById('modalSiswa').classList.remove('active'); }
 
         setInterval(() => {
-            const now = new Date();
-            document.getElementById('clockDisplay').innerHTML = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' | ' + now.toLocaleTimeString('id-ID');
+            document.getElementById('clockDisplay').innerHTML = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' | ' + new Date().toLocaleTimeString('id-ID');
         }, 1000);
 
-        // Jalankan pengambilan data otomatis saat web pertama kali dibuka
         loadDataSiswa();
     </script>
 </body>
