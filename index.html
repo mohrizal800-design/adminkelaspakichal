@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --primary-color: #16A34A; /* Warna hijau khas Google Sheets */ --primary-hover: #15803D; --bg-color: #F3F4F6; --sidebar-bg: #1F2937; --sidebar-hover: #374151; --text-main: #111827; --text-muted: #6B7280; --white: #FFFFFF; }
+        :root { --primary-color: #16A34A; --primary-hover: #15803D; --bg-color: #F3F4F6; --sidebar-bg: #1F2937; --sidebar-hover: #374151; --text-main: #111827; --text-muted: #6B7280; --white: #FFFFFF; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg-color); display: flex; height: 100vh; overflow: hidden; }
         .sidebar { width: 260px; background-color: var(--sidebar-bg); color: var(--white); display: flex; flex-direction: column; overflow-y: auto; }
@@ -131,7 +131,6 @@
                         <option value="Perempuan">Perempuan (P)</option>
                     </select>
                 </div>
-                <!-- Input foto dihilangkan agar kompatibel dengan Google Sheets -->
                 <div class="modal-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
                     <button type="submit" class="btn btn-primary" id="btnSimpan">Simpan ke Excel</button>
@@ -142,7 +141,7 @@
 
     <script>
         // ==========================================
-        // GANTI URL DI BAWAH INI DENGAN URL WEB APP GOOGLE SCRIPT ANDA
+        // URL SUDAH TERPASANG OTOMATIS DI BAWAH INI
         // ==========================================
         const scriptURL = 'https://script.google.com/macros/s/AKfycbysKq7vIg9X62lmTe_eHKP8sxhukdMOLA0uGphsKXn2fWMiSfuUr2vDm6io38-5S-0/exec';
 
@@ -151,13 +150,7 @@
         const dataSiswaBody = document.getElementById('dataSiswaBody');
         const tableLoader = document.getElementById('tableLoader');
 
-        // Fungsi Menarik Data dari Google Sheets
         async function loadDataSiswa() {
-            if (scriptURL === 'MASUKKAN_URL_GOOGLE_APPS_SCRIPT_ANDA_DI_SINI') {
-                dataSiswaBody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:red;">Harap masukkan URL Google Apps Script pada kode HTML!</td></tr>';
-                return;
-            }
-
             tableLoader.style.display = 'block';
             dataSiswaBody.innerHTML = ''; 
             
@@ -170,7 +163,7 @@
                 }
 
                 data.forEach(siswa => {
-                    if (siswa.nama) { // Memastikan baris tidak kosong
+                    if (siswa.nama) { 
                         let avatarUrl = `https://ui-avatars.com/api/?name=${siswa.nama}&background=random&color=fff`;
                         let tr = document.createElement('tr');
                         tr.innerHTML = `
@@ -184,12 +177,11 @@
                 });
             } catch (error) {
                 console.error("Error:", error);
-                dataSiswaBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Gagal memuat data. Cek URL atau koneksi internet.</td></tr>';
+                dataSiswaBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Gagal memuat data. Pastikan akses Google Script sudah diset ke "Siapa Saja".</td></tr>';
             }
             tableLoader.style.display = 'none';
         }
 
-        // Fungsi Menyimpan Data ke Google Sheets
         formSiswa.addEventListener('submit', e => {
             e.preventDefault();
             btnSimpan.innerText = "Menyimpan...";
@@ -202,7 +194,7 @@
                     closeModal();
                     formSiswa.reset();
                     alert("Data berhasil tersimpan di Google Sheets!");
-                    loadDataSiswa(); // Muat ulang tabel
+                    loadDataSiswa(); 
                 })
                 .catch(error => {
                     alert('Gagal menyimpan data: ' + error.message);
@@ -213,7 +205,6 @@
                 });
         });
 
-        // Panggil fungsi saat web dibuka
         loadDataSiswa();
 
         // --- SCRIPT UI ---
